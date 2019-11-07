@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM tomcat8
 MAINTAINER yasaka "mail_yanpeng@163.com"
 #设置Java环境变量
 RUN rm -rf /usr/local/tomcat/webapps/*
