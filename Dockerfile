@@ -1,4 +1,4 @@
-FROM tomcat:tomcat
+FROM tomcat:8.0.45-jre7
 MAINTAINER jenkenyang "jenkenyang@gmail.com"
 #设置Java环境变量
 RUN rm -rf /usr/local/tomcat/webapps/*
