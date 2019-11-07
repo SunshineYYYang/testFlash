@@ -1,0 +1,20 @@
+
+server:
+  port: 8761
+spring:
+  application:
+    name: gcs-server-eureka
+eureka:
+  client:
+    register-with-eureka: false #是否将自己注册到eureka服务中，本身就是，无需注册
+    fetch-registry: false #是否从eureka中获取注册信息
+    service-url:  #eureka客户端与eureka服务端及逆行交互的地址
+#      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka/
+      defaultZone: http://localhost:8762/eureka/
+  instance:
+    prefer-ip-address: true #将自己的ip地址注册到eurka服务中
+    ip-address: 127.0.0.1
+    instance-id: ${eureka.instance.ip-address}:8761
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
