@@ -1,9 +1,9 @@
-FROM tomcat:9.0.0.M25
-MAINTAINER yasaka "mail_yanpeng@163.com"
-#设置Java环境变量
-ENV JAVA_OPTS -server -Duser.timezone="Asia/Shanghai"
-COPY ./docker.war ${CATALINA_HOME}/webapps/docker.war
-#ADD docker.war test.war
-#ADD ./docker.war /
+
+FROM openjdk:8-jdk-alpine
+MAINTAINER "yjg shuai@qq.com"
+LABEL description="描述"
+WORKDIR app
+ADD eurekaserver-0.0.1-SNAPSHOT.jar /app/app.jar
+ADD application.yml /app/application.yml
 EXPOSE 8080
-ENTRYPOINT ["/usr/local/tomcat/bin/catalina.sh","run"]
+CMD java -jar /app/app.jar
