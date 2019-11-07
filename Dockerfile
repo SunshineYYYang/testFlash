@@ -1,9 +1,9 @@
-FROM tomcat:8.0.45-jre7
-MAINTAINER jenkenyang "jenkenyang@gmail.com"
+FROM tomcat:9.0.0.M25
+MAINTAINER yasaka "mail_yanpeng@163.com"
 #设置Java环境变量
-RUN rm -rf /usr/local/tomcat/webapps/*
 ENV JAVA_OPTS -server -Duser.timezone="Asia/Shanghai"
+COPY ./docker.war ${CATALINA_HOME}/webapps/docker.war
 #ADD docker.war test.war
-ADD ./docker.war /
+#ADD ./docker.war /
 EXPOSE 8080
 ENTRYPOINT ["/usr/local/tomcat/bin/catalina.sh","run"]
