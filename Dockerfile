@@ -1,5 +1,5 @@
 FROM tomcat:8.0.45-jre7
-MAINTAINER yasaka "mail_yanpeng@163.com"
+MAINTAINER jenkenyang "jenkenyang@gmail.com"
 #设置Java环境变量
 RUN rm -rf /usr/local/tomcat/webapps/*
 ENV JAVA_OPTS -server -Duser.timezone="Asia/Shanghai"
