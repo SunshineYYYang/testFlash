@@ -1,4 +1,4 @@
-FROM tomcat8
+FROM tomcat:8.0.45-jre7
 MAINTAINER yasaka "mail_yanpeng@163.com"
 #设置Java环境变量
 RUN rm -rf /usr/local/tomcat/webapps/*
