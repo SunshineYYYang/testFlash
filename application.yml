@@ -1,20 +1,73 @@
 
-server:
-  port: 8761
 spring:
+  datasource:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      url: jdbc:sqlserver://10.6.15.14:1433;database=SteerMarketDB_3RD
+      username: yangjinggang
+      password: Cmst604951
+      type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+      multipart:
+        max-file-size: 10MB
+        max-request-size: 100MB
   application:
-    name: gcs-server-eureka
+    name: gcshop-client
+  redis:
+    host: 114.247.42.134
+    port: 8894
+    password: root
+    database: 0
+    timeout: 6000  
+    # 数据库连接超时时间，2.0 中该参数的类型为Duration，这里在配置的时候需要指明单位
+    # 连接池配置，2.0中直接使用jedis或者lettuce配置连接池
+    jedis:
+      pool:
+        # 最大空闲连接数
+        max-idle: 500
+        # 最小空闲连接数
+        min-idle: 50
+        # 等待可用连接的最大时间，负数为不限制
+        max-wait:  -1
+        # 最大活跃连接数，负数为不限制
+        max-active: -1
+
+mybatis:
+  typeAliasesPackage: com.cmst.gcs.pojo
+  mapperLocations: classpath:mybatis-mapper/*.xml
+server:
+  port: 8895
+  servlet:
+    context-path: /gcs
+mapper:
+  mappers:
+  - tk.mybatis.mapper.common.Mapper
+  - tk.mybatis.mapper.common.SqlServerMapper
+  not-empty: false
+  identity: SQLSERVER
+  #热部署生效
+  spring.devtools.restart.enabled: true
+  #设置重启的目录
+  #spring.devtools.restart.additional-paths: src/main/java
+  #classpath目录下的WEB-INF文件夹内容修改不重启
+  spring.devtools.restart.exclude: WEB-INF/**
 eureka:
   client:
-    register-with-eureka: false #是否将自己注册到eureka服务中，本身就是，无需注册
-    fetch-registry: false #是否从eureka中获取注册信息
-    service-url:  #eureka客户端与eureka服务端及逆行交互的地址
-#      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka/
-      defaultZone: http://localhost:8762/eureka/
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
   instance:
-    prefer-ip-address: true #将自己的ip地址注册到eurka服务中
-    ip-address: 127.0.0.1
-    instance-id: ${eureka.instance.ip-address}:8761
-  server:
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 60000
+    hostname: gcshop
+feign:
+  client:
+    default-config:
+       remote-service:           #服务名，填写default为所有服务
+              connectTimeout: 10000
+              readTimeout: 12000
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+image-system-params:
+  image-url: http://114.247.42.134:8893/test/img/
+  image-address: D:\Images\
+JhUrl: http://emall.ccb.com:8880/
+
+
