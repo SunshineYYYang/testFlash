@@ -2,7 +2,7 @@
 spring:
   datasource:
       driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-      url: jdbc:sqlserver://10.6.15.14:1433;database=SteerMarketDB_3RD
+      url: jdbc:sqlserver://114.247.42.133:1433;database=SteerMarketDB_3RD
       username: yangjinggang
       password: Cmst604951
       type: com.alibaba.druid.pool.DruidDataSource
@@ -53,7 +53,7 @@ mapper:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+      defaultZone: http://49.233.170.4:8761/eureka/,http://49.233.170.4:8762/eureka/
   instance:
     hostname: gcshop
 feign:
